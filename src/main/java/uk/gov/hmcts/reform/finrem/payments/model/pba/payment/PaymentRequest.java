@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.finrem.payments.model.pba.payment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,9 +52,11 @@ public class PaymentRequest {
     private List<FeeRequest> feesList;
 
     @JsonProperty(value = "site_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Builder.Default
     private String siteId = "AA09";
 
     @JsonProperty(value = "case_type")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String caseType;
 }
