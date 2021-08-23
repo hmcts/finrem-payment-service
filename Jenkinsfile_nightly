@@ -23,5 +23,10 @@ withNightlyPipeline(type, product, component) {
     env.Rules = params.SecurityRules
     enableMutationTest()
     enableSecurityScan()
+    enableFortifyScan()
+
+    after('fortify-scan') {
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
+    }
 
 }

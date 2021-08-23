@@ -39,7 +39,7 @@ targetCompatibility = 11
 
 repositories {
     jcenter()
-    maven { url "https://dl.bintray.com/hmcts/hmcts-maven" }
+    maven { url "https://jitpack.io" }
     maven { url 'https://repo.spring.io/libs-milestone' }
 }
 
@@ -161,6 +161,8 @@ dependencies {
     testSmokeImplementation group: 'io.rest-assured', name: 'rest-assured', version: versions.restAssured
     testSmokeImplementation sourceSets.main.runtimeClasspath
     testSmokeImplementation sourceSets.test.runtimeClasspath
+
+    testCompile('com.github.hmcts:fortify-client:1.2.0:all')
 
     functionalImplementation group: 'io.rest-assured', name: 'rest-assured', version: versions.restAssured
     functionalImplementation group: 'junit', name: 'junit', version: versions.junit
@@ -322,4 +324,10 @@ pact {
         tags = [System.getenv("PACT_BRANCH_NAME") ?: 'Dev']
         version = project.pacticipantVersion
     }
+}
+
+task fortifyScan(type: JavaExec)  {
+    main = "uk.gov.hmcts.fortifyclient.FortifyClientMainApp"
+    classpath += sourceSets.test.runtimeClasspath
+    jvmArgs = ['--add-opens=java.base/java.lang.reflect=ALL-UNNAMED']
 }
