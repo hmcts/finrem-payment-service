@@ -136,6 +136,8 @@ dependencyManagement {
         }
         // CVE-2020-15250
         dependency group: 'junit', name: 'junit', version: versions.junit
+
+        dependency group: 'org.glassfish', name: 'jakarta.el', version: '3.0.4'
     }
 }
 
