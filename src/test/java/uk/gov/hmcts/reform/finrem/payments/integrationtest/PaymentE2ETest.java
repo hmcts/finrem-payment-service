@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.reform.finrem.payments.PaymentsApplication;
+import uk.gov.hmcts.reform.finrem.payments.config.FeeServiceConfiguration;
 import uk.gov.hmcts.reform.finrem.payments.model.ApplicationType;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -60,6 +61,9 @@ public class PaymentE2ETest {
 
     @Autowired
     private MockMvc webClient;
+
+    @Autowired
+    private FeeServiceConfiguration serviceConfig;
 
     @Value("${payment.api}")
     private String paymentApi;
@@ -221,7 +225,8 @@ public class PaymentE2ETest {
                     + "&channel=default&event=general%20application&keyword=" + consentedFeeKeyword;
         } else {
             return feeApi + "?service=other&jurisdiction1=family&jurisdiction2=family-court"
-                    + "&channel=default&event=miscellaneous&keyword=FinancialOrderOnNotice";
+                    + "&channel=default&event=miscellaneous&keyword="
+                + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword());
         }
     }
 }

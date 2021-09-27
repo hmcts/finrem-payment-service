@@ -14,7 +14,6 @@ import java.net.URI;
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 import static uk.gov.hmcts.reform.finrem.payments.model.ApplicationType.CONSENTED;
 
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -46,7 +45,7 @@ public class FeeService {
 
     private String getKeyword(ApplicationType application) {
         return application == CONSENTED ? serviceConfig.getConsentedKeyword()
-            : serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
-            : serviceConfig.getContestedKeyword();
+            : (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
+            : serviceConfig.getContestedKeyword());
     }
 }
