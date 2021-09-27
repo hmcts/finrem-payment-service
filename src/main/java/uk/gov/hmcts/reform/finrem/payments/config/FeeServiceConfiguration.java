@@ -17,7 +17,6 @@ public class FeeServiceConfiguration {
 
     private String consentedEvent;
     private String consentedKeyword;
-    private String consentedNewKeyword;
 
     private String contestedEvent;
     private String contestedKeyword;

@@ -43,7 +43,7 @@ public class FeeService {
                 .toUri();
     }
 
-    private String getKeyword(ApplicationType application) {
+    protected String getKeyword(ApplicationType application) {
         return application == CONSENTED ? serviceConfig.getConsentedKeyword()
             : (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
             : serviceConfig.getContestedKeyword());

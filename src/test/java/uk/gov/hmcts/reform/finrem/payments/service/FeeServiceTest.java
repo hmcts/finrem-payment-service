@@ -61,6 +61,18 @@ public class FeeServiceTest extends BaseServiceTest {
         MatcherAssert.assertThat(feeResponse.getFeeAmount(), Matchers.is(BigDecimal.valueOf(255)));
     }
 
+
+    @Test
+    public void shouldDetermineKeyword() {
+        String keyword = feeService.getKeyword(CONSENTED);
+        MatcherAssert.assertThat(keyword, Matchers.is(serviceConfig.getConsentedKeyword()));
+
+        String keywordContested = feeService.getKeyword(CONTESTED);
+        MatcherAssert.assertThat(keywordContested,
+            Matchers.is(serviceConfig.getFeePayNewKeywords()
+                ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword()));
+    }
+
     private String consentedUri() {
         return "http://localhost:8182/fees-register/fees/lookup?service=other&jurisdiction1=family&jurisdiction2=family-court&channel=default"
                 + "&event=general%20application&keyword=" + consentedFeeKeyword;
