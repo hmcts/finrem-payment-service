@@ -44,8 +44,12 @@ public class FeeService {
     }
 
     protected String getKeyword(ApplicationType application) {
-        return application == CONSENTED ? serviceConfig.getConsentedKeyword()
-            : (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
-            : serviceConfig.getContestedKeyword());
+        if (application == CONSENTED) {
+            return serviceConfig.getConsentedKeyword();
+        } else if (serviceConfig.getFeePayNewKeywords()) {
+            return serviceConfig.getContestedNewKeyword();
+        } else {
+            return serviceConfig.getContestedKeyword();
+        }
     }
 }
