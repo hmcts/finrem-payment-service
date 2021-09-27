@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.finrem.payments.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -38,10 +39,14 @@ public class FeeService {
                 .queryParam("channel", serviceConfig.getChannel())
                 .queryParam("event", application == CONSENTED
                         ? serviceConfig.getConsentedEvent() : serviceConfig.getContestedEvent())
-                .queryParam("keyword", application == CONSENTED
-                        ? serviceConfig.getConsentedKeyword() : serviceConfig.getContestedKeyword())
+                .queryParam("keyword", getKeyword(application))
                 .build()
                 .encode()
                 .toUri();
+    }
+
+    private String getKeyword(ApplicationType application) {
+        return application == CONSENTED
+                ? serviceConfig.getConsentedKeyword() : serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword();
     }
 }

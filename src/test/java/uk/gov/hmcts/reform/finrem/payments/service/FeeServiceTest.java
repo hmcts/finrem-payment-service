@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import uk.gov.hmcts.reform.finrem.payments.BaseServiceTest;
+import uk.gov.hmcts.reform.finrem.payments.config.FeeServiceConfiguration;
 import uk.gov.hmcts.reform.finrem.payments.model.fee.FeeResponse;
 
 import java.math.BigDecimal;
@@ -25,6 +26,9 @@ public class FeeServiceTest extends BaseServiceTest {
 
     @Value("${fees.consented-keyword}")
     private String consentedFeeKeyword;
+
+    @Autowired
+    private FeeServiceConfiguration serviceConfig;
 
     @Test
     public void retrieveConsentedFee() {
@@ -63,8 +67,9 @@ public class FeeServiceTest extends BaseServiceTest {
     }
 
     private String contestedUri() {
+
         return "http://localhost:8182/fees-register/fees/lookup?service=other&jurisdiction1=family&jurisdiction2=family-court&channel=default"
-                + "&event=miscellaneous&keyword=FinancialOrderOnNotice";
+                + "&event=miscellaneous&keyword=" + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword());
     }
 
 }

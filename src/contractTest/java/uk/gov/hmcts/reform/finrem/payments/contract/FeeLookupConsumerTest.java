@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import uk.gov.hmcts.reform.finrem.payments.BaseTest;
+import uk.gov.hmcts.reform.finrem.payments.config.FeeServiceConfiguration;
 import uk.gov.hmcts.reform.finrem.payments.model.ApplicationType;
 import uk.gov.hmcts.reform.finrem.payments.model.fee.FeeResponse;
 import uk.gov.hmcts.reform.finrem.payments.service.FeeService;
@@ -31,6 +32,9 @@ public class FeeLookupConsumerTest extends BaseTest {
     @Autowired
     FeeService feeService;
 
+    @Autowired
+    private FeeServiceConfiguration serviceConfig;
+
     @Rule
     public PactProviderRule mockProvider = new PactProviderRule("feeRegister_lookUp", "localhost", 8889, this);
 
@@ -43,7 +47,7 @@ public class FeeLookupConsumerTest extends BaseTest {
 
     @Pact(provider = "feeRegister_lookUp", consumer = "fr_paymentService")
     public RequestResponsePact generateContestedFeesPactFragment(PactDslWithProvider builder) throws JSONException {
-        return buildRequestResponsePact(builder, "miscellaneous", "FinancialOrderOnNotice",
+        return buildRequestResponsePact(builder, "miscellaneous", serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword(),
             "FEE0229", "Contested Fees exist for Financial Remedy", "a request for Contested FR fees");
 
     }

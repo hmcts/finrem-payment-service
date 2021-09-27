@@ -16,6 +16,10 @@ public class FeeServiceConfigurationTest extends BaseServiceTest {
     @Value("${fees.consented-keyword}")
     private String consentedFeeKeyword;
 
+    @Value("${fees.fee-pay-new-keywords}")
+    private Boolean contestedUseNewKeywords;
+
+
     @Test
     public void shouldCreateConsentedFeeServiceConfigFromAppProperties() {
         assertThat(config.getUrl(), is("http://localhost:8182"));
@@ -26,6 +30,7 @@ public class FeeServiceConfigurationTest extends BaseServiceTest {
         assertThat(config.getService(), is("other"));
         assertThat(config.getConsentedEvent(), is("general application"));
         assertThat(config.getConsentedKeyword(), is(consentedFeeKeyword));
+
     }
 
     @Test
@@ -37,6 +42,8 @@ public class FeeServiceConfigurationTest extends BaseServiceTest {
         assertThat(config.getJurisdiction2(), is("family-court"));
         assertThat(config.getService(), is("other"));
         assertThat(config.getContestedEvent(), is("miscellaneous"));
-        assertThat(config.getContestedKeyword(), is("FinancialOrderOnNotice"));
+        assertThat(config.getContestedNewKeyword(), is("FinancialOrderOnNotice"));
+        assertThat(config.getContestedKeyword(), is("financial-order"));
+        assertThat(config.getFeePayNewKeywords(), is(contestedUseNewKeywords));
     }
 }
