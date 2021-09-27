@@ -47,7 +47,8 @@ public class FeeLookupConsumerTest extends BaseTest {
 
     @Pact(provider = "feeRegister_lookUp", consumer = "fr_paymentService")
     public RequestResponsePact generateContestedFeesPactFragment(PactDslWithProvider builder) throws JSONException {
-        return buildRequestResponsePact(builder, "miscellaneous", serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword(),
+        return buildRequestResponsePact(builder, "miscellaneous", serviceConfig.getFeePayNewKeywords()
+                ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword(),
             "FEE0229", "Contested Fees exist for Financial Remedy", "a request for Contested FR fees");
 
     }

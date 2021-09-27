@@ -67,9 +67,9 @@ public class FeeServiceTest extends BaseServiceTest {
     }
 
     private String contestedUri() {
-
         return "http://localhost:8182/fees-register/fees/lookup?service=other&jurisdiction1=family&jurisdiction2=family-court&channel=default"
-                + "&event=miscellaneous&keyword=" + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword());
+                + "&event=miscellaneous&keyword=" + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
+            : serviceConfig.getContestedKeyword());
     }
 
 }
