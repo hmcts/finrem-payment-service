@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.reform.finrem.payments.PaymentsApplication;
+import uk.gov.hmcts.reform.finrem.payments.config.FeeServiceConfiguration;
 import uk.gov.hmcts.reform.finrem.payments.model.ApplicationType;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -49,9 +50,9 @@ import static uk.gov.hmcts.reform.finrem.payments.model.ApplicationType.CONTESTE
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class PaymentE2ETest {
 
-    private static String MAKE_PAYMENT_API = "/payments/pba-payment";
-    private static String FEE_LOOK_UP_API = "/payments/fee-lookup?application-type=";
-    private static String PBA_VALIDATE_API = "/payments/pba-validate";
+    private static final String MAKE_PAYMENT_API = "/payments/pba-payment";
+    private static final String FEE_LOOK_UP_API = "/payments/fee-lookup?application-type=";
+    private static final String PBA_VALIDATE_API = "/payments/pba-validate";
 
     private static final String AUTH_TOKEN = "Bearer test.auth.token";
     private static final String TEST_SERVICE_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
@@ -60,6 +61,9 @@ public class PaymentE2ETest {
 
     @Autowired
     private MockMvc webClient;
+
+    @Autowired
+    private FeeServiceConfiguration serviceConfig;
 
     @Value("${payment.api}")
     private String paymentApi;
@@ -221,7 +225,8 @@ public class PaymentE2ETest {
                     + "&channel=default&event=general%20application&keyword=" + consentedFeeKeyword;
         } else {
             return feeApi + "?service=other&jurisdiction1=family&jurisdiction2=family-court"
-                    + "&channel=default&event=miscellaneous&keyword=financial-order";
+                    + "&channel=default&event=miscellaneous&keyword="
+                + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword());
         }
     }
 }

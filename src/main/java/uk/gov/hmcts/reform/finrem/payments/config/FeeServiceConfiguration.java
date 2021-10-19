@@ -20,4 +20,7 @@ public class FeeServiceConfiguration {
 
     private String contestedEvent;
     private String contestedKeyword;
+    private String contestedNewKeyword;
+
+    private Boolean feePayNewKeywords;
 }
