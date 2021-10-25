@@ -10,7 +10,6 @@ java:
     PRD_API_URL : http://rd-professional-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
     IDAM_S2S_URL : http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
     PAYMENT_API_URL: http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
-    FEATURE_FEE_PAY_KEYWORDS: "true"
   keyVaults:
     finrem:
       secrets:
