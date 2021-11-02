@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import uk.gov.hmcts.reform.finrem.payments.BaseServiceTest;
+import uk.gov.hmcts.reform.finrem.payments.config.FeeServiceConfiguration;
 import uk.gov.hmcts.reform.finrem.payments.model.fee.FeeResponse;
 
 import java.math.BigDecimal;
@@ -25,6 +26,9 @@ public class FeeServiceTest extends BaseServiceTest {
 
     @Value("${fees.consented-keyword}")
     private String consentedFeeKeyword;
+
+    @Autowired
+    private FeeServiceConfiguration serviceConfig;
 
     @Test
     public void retrieveConsentedFee() {
@@ -57,6 +61,18 @@ public class FeeServiceTest extends BaseServiceTest {
         MatcherAssert.assertThat(feeResponse.getFeeAmount(), Matchers.is(BigDecimal.valueOf(255)));
     }
 
+
+    @Test
+    public void shouldDetermineKeyword() {
+        String keyword = feeService.getKeyword(CONSENTED);
+        MatcherAssert.assertThat(keyword, Matchers.is(serviceConfig.getConsentedKeyword()));
+
+        String keywordContested = feeService.getKeyword(CONTESTED);
+        MatcherAssert.assertThat(keywordContested,
+            Matchers.is(serviceConfig.getFeePayNewKeywords()
+                ? serviceConfig.getContestedNewKeyword() : serviceConfig.getContestedKeyword()));
+    }
+
     private String consentedUri() {
         return "http://localhost:8182/fees-register/fees/lookup?service=other&jurisdiction1=family&jurisdiction2=family-court&channel=default"
                 + "&event=general%20application&keyword=" + consentedFeeKeyword;
@@ -64,7 +80,8 @@ public class FeeServiceTest extends BaseServiceTest {
 
     private String contestedUri() {
         return "http://localhost:8182/fees-register/fees/lookup?service=other&jurisdiction1=family&jurisdiction2=family-court&channel=default"
-                + "&event=miscellaneous&keyword=financial-order";
+                + "&event=miscellaneous&keyword=" + (serviceConfig.getFeePayNewKeywords() ? serviceConfig.getContestedNewKeyword()
+            : serviceConfig.getContestedKeyword());
     }
 
 }

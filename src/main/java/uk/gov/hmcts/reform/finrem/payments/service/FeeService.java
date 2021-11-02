@@ -14,7 +14,6 @@ import java.net.URI;
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 import static uk.gov.hmcts.reform.finrem.payments.model.ApplicationType.CONSENTED;
 
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -32,16 +31,27 @@ public class FeeService {
 
     private URI buildUri(ApplicationType application) {
         return fromHttpUrl(serviceConfig.getUrl() + serviceConfig.getApi())
-                .queryParam("service", serviceConfig.getService())
-                .queryParam("jurisdiction1", serviceConfig.getJurisdiction1())
-                .queryParam("jurisdiction2", serviceConfig.getJurisdiction2())
-                .queryParam("channel", serviceConfig.getChannel())
-                .queryParam("event", application == CONSENTED
-                        ? serviceConfig.getConsentedEvent() : serviceConfig.getContestedEvent())
-                .queryParam("keyword", application == CONSENTED
-                        ? serviceConfig.getConsentedKeyword() : serviceConfig.getContestedKeyword())
-                .build()
-                .encode()
-                .toUri();
+            .queryParam("service", serviceConfig.getService())
+            .queryParam("jurisdiction1", serviceConfig.getJurisdiction1())
+            .queryParam("jurisdiction2", serviceConfig.getJurisdiction2())
+            .queryParam("channel", serviceConfig.getChannel())
+            .queryParam("event", application == CONSENTED
+                ? serviceConfig.getConsentedEvent() : serviceConfig.getContestedEvent())
+            .queryParam("keyword", getKeyword(application))
+            .build()
+            .encode()
+            .toUri();
+    }
+
+    protected String getKeyword(ApplicationType application) {
+        log.info("Inside getKeyword for application type: {} and with use new keywords set to {}",
+             application, serviceConfig.getFeePayNewKeywords());
+        if (application == CONSENTED) {
+            return serviceConfig.getConsentedKeyword();
+        } else if (serviceConfig.getFeePayNewKeywords()) {
+            return serviceConfig.getContestedNewKeyword();
+        } else {
+            return serviceConfig.getContestedKeyword();
+        }
     }
 }
