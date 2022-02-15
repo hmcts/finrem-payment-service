@@ -32,10 +32,10 @@ public class IdamUtils implements IdamUserClient {
     private String idamSecret;
 
     public String generateUserTokenWithNoRoles(String username, String password) {
-
+        log.info("TEST USER ==", username);
+        log.info("TEST PASSWORD ==", password);
         String userLoginDetails = String.join(":", username, password);
         final String authHeader = "Basic " + new String(Base64.getEncoder().encode((userLoginDetails).getBytes()));
-
 
         Response response = RestAssured.given()
             .header("Authorization", authHeader)
