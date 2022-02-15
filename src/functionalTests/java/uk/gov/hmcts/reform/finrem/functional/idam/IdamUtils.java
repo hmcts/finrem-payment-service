@@ -36,7 +36,7 @@ public class IdamUtils implements IdamUserClient {
             username = "fr_applicant_sol@sharklasers.com";
         }
         if(password == null) {
-            password = "Testing1234;
+            password = "Testing1234";
         }
         String userLoginDetails = String.join(":", username, password);
         final String authHeader = "Basic " + new String(Base64.getEncoder().encode((userLoginDetails).getBytes()));
