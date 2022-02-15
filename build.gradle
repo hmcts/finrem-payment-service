@@ -138,6 +138,12 @@ dependencyManagement {
         dependency group: 'junit', name: 'junit', version: versions.junit
 
         dependency group: 'org.glassfish', name: 'jakarta.el', version: '3.0.4'
+
+        //CVE-2021-42550
+        dependencySet(group: 'ch.qos.logback', version: '1.2.10') {
+            entry 'logback-classic'
+            entry 'logback-core'
+        }
     }
 }
 
