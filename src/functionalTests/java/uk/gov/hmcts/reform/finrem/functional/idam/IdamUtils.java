@@ -13,7 +13,7 @@ import java.util.Base64;
 @Slf4j
 @Component
 public class IdamUtils implements IdamUserClient {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(IdamUtils.class);
     @Autowired
     private FunctionalTestUtils utils;
 
