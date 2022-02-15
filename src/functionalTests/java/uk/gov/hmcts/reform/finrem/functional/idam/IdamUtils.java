@@ -13,7 +13,7 @@ import java.util.Base64;
 @Slf4j
 @Component
 public class IdamUtils implements IdamUserClient {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(IdamUtils.class);
+
     @Autowired
     private FunctionalTestUtils utils;
 
@@ -32,10 +32,15 @@ public class IdamUtils implements IdamUserClient {
     private String idamSecret;
 
     public String generateUserTokenWithNoRoles(String username, String password) {
-        log.info("TEST USER ==", username);
-        log.info("TEST PASSWORD ==", password);
+        if(username == null) {
+            username = "fr_applicant_sol@sharklasers.com";
+        }
+        if(password == null) {
+            password = "Testing1234;
+        }
         String userLoginDetails = String.join(":", username, password);
         final String authHeader = "Basic " + new String(Base64.getEncoder().encode((userLoginDetails).getBytes()));
+
 
         Response response = RestAssured.given()
             .header("Authorization", authHeader)
