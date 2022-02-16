@@ -46,6 +46,8 @@ public class FunctionalTestUtils {
     public Headers getHeader() {
         log.info("IdamUSER==={}===",idamUserName);
         log.info("IdamPASSWORD==={}==",idamUserPassword);
+        idamUserName = "fr_applicant_sol@sharklasers.com";
+        log.info("IdamUSER122==={}===",idamUserName);
         String authToken = idamUtils.generateUserTokenWithNoRoles(idamUserName, idamUserPassword);
         System.out.println(authToken);
         log.info("IdamauthToken==={}==",authToken);
