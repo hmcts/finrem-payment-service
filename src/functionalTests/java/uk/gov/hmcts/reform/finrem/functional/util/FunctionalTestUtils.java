@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.given;
 
 @Component
 public class FunctionalTestUtils {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(FunctionalTestUtils.class);
     @Value("${idam.api.url}")
     public String baseServiceOauth2Url = "";
     @Value("${user.id.url}")
@@ -44,8 +44,11 @@ public class FunctionalTestUtils {
     }
 
     public Headers getHeader() {
+        log.info("IdamUSER==={}===",idamUserName);
+        log.info("IdamPASSWORD==={}==",idamUserPassword);
         String authToken = idamUtils.generateUserTokenWithNoRoles(idamUserName, idamUserPassword);
         System.out.println(authToken);
+        log.info("IdamauthToken==={}==",authToken);
         return Headers.headers(
 
                 new Header("Authorization", "Bearer "

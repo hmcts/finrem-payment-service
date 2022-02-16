@@ -13,7 +13,7 @@ import java.util.Base64;
 @Slf4j
 @Component
 public class IdamUtils implements IdamUserClient {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(IdamUtils.class);
     @Autowired
     private FunctionalTestUtils utils;
 
@@ -58,7 +58,7 @@ public class IdamUtils implements IdamUserClient {
     }
 
     private String idamCodeUrl() {
-
+        log.info("IdamidamUserBaseUrl==={}==",idamUserBaseUrl);
         return idamUserBaseUrl + "/oauth2/authorize"
             + "?response_type=code"
             + "&client_id=finrem"
