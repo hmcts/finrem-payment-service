@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/hmcts/finrem-notification-service.svg?branch=master)](https://travis-ci.org/hmcts/finrem-notification-service)
 
 ## Building and deploying the application
-
+## TESTING
 ### Building the application
 
 The project uses [Gradle](https://gradle.org) as a build tool. It already contains
