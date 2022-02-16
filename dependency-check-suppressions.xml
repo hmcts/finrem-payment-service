@@ -28,4 +28,88 @@
                 ]]></notes>
         <cve>CVE-2021-22096</cve>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-api-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-api@.*$</packageUrl>
+        <cve>CVE-2021-44228</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-api-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-api@.*$</packageUrl>
+        <cve>CVE-2021-44832</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-api-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-api@.*$</packageUrl>
+        <cve>CVE-2021-45046</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-api-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-api@.*$</packageUrl>
+        <cve>CVE-2021-45105</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-to-slf4j-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-to\-slf4j@.*$</packageUrl>
+        <cve>CVE-2021-44228</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-to-slf4j-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-to\-slf4j@.*$</packageUrl>
+        <cve>CVE-2021-44832</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: log4j-to-slf4j-2.13.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-to\-slf4j@.*$</packageUrl>
+        <cve>CVE-2021-45105</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: logback-classic-1.2.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/ch\.qos\.logback/logback\-classic@.*$</packageUrl>
+        <cve>CVE-2021-42550</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: logback-core-1.2.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/ch\.qos\.logback/logback\-core@.*$</packageUrl>
+        <cve>CVE-2021-42550</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: spring-core-5.2.15.RELEASE.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.springframework/spring\-core@.*$</packageUrl>
+        <cve>CVE-2021-22060</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-core-9.0.48.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.tomcat\.embed/tomcat\-embed\-core@.*$</packageUrl>
+        <cve>CVE-2022-23181</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-websocket-9.0.48.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.tomcat\.embed/tomcat\-embed\-websocket@.*$</packageUrl>
+        <cve>CVE-2022-23181</cve>
+    </suppress>
 </suppressions>
