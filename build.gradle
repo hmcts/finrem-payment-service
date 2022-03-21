@@ -90,6 +90,7 @@ def versions = [
     commonsLang3            : '3.11',
     commonsIo               : '2.7',
     guava                   : '30.1-jre',
+    jackson                 : ''
     javaxWsRs               : '2.1.1',
     jsonAssert              : '1.5.0',
     junit                   : '4.13.1',
@@ -163,6 +164,9 @@ dependencies {
     implementation group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: versions.reformPropertiesVolume
     implementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: versions.serviceTokenGenerator
     implementation group: 'org.codehaus.sonar-plugins', name: 'sonar-pitest-plugin', version: versions.sonarPitest
+
+    implementation group: 'com.fasterxml.jackson.core', name:'jackson-databind', version: versions.jackson
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: versions.jackson
 
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: versions.apacheLogging
     implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: versions.apacheLogging
