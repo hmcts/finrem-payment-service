@@ -90,6 +90,7 @@ def versions = [
     commonsLang3            : '3.11',
     commonsIo               : '2.7',
     guava                   : '30.1-jre',
+    jackson                 : '2.13.2',
     javaxWsRs               : '2.1.1',
     jsonAssert              : '1.5.0',
     junit                   : '4.13.1',
@@ -145,6 +146,11 @@ dependencyManagement {
             entry 'logback-classic'
             entry 'logback-core'
         }
+        dependencySet(group: 'com.fasterxml.jackson.core', version: versions.jackson) {
+            entry 'jackson-core'
+            entry 'jackson-databind'
+            entry 'jackson-annotations'
+        }
     }
 }
 
@@ -187,6 +193,9 @@ dependencies {
     functionalImplementation group: 'org.skyscreamer', name: 'jsonassert', version: versions.jsonAssert
     functionalImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     functionalImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+    functionalImplementation group: 'com.fasterxml.jackson.core', name:'jackson-databind', version: versions.jackson
+    functionalImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: versions.jackson
 
     contractCompile group: 'au.com.dius.pact.consumer', name: 'junit', version: versions.pact_version
     contractCompile group: 'au.com.dius.pact.consumer', name: 'java8', version: versions.pact_version
