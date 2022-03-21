@@ -90,7 +90,7 @@ def versions = [
     commonsLang3            : '3.11',
     commonsIo               : '2.7',
     guava                   : '30.1-jre',
-    jackson                 : ''
+    jackson                 : '2.13.2',
     javaxWsRs               : '2.1.1',
     jsonAssert              : '1.5.0',
     junit                   : '4.13.1',
