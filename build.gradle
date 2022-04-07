@@ -151,6 +151,18 @@ dependencyManagement {
             entry 'jackson-databind'
             entry 'jackson-annotations'
         }
+        //CVE-2022-22965
+        dependencySet(group: 'org.springframework', version: '5.2.20.RELEASE') {
+            entry 'spring-aop'
+            entry 'spring-beans'
+            entry 'spring-context'
+            entry 'spring-context-support'
+            entry 'spring-core'
+            entry 'spring-expression'
+            entry 'spring-jcl'
+            entry 'spring-web'
+            entry 'spring-webmvc'
+        }
     }
 }
 
