@@ -18,3 +18,7 @@ java:
         - idam-secret
         - username-solicitor
         - password-solicitor
+autoscaling:
+  enabled: false
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
