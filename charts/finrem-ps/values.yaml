@@ -18,7 +18,7 @@ java:
         - idam-secret
         - username-solicitor
         - password-solicitor
-    autoscaling:
+  autoscaling:
     enabled: true
     maxReplicas: 4
     minReplicas: 2
